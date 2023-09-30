@@ -9,7 +9,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float color;
     [SerializeField] private float damage;
     private Renderer gameObject1;
-    public float temp;
+    
      
      
 
@@ -53,6 +53,7 @@ public class Enemy : MonoBehaviour
         }
         if (other.CompareTag("Wall"))
         {
+            color = 0;
 
         }
         if (other.CompareTag("Player"))
