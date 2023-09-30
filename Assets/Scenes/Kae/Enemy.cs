@@ -5,22 +5,27 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
      [SerializeField] private float health;
-    public float c11;
-    public float c12;
-    public float c13;
-    public Color c1 = new Color(0, 0, 0);
-
-    
+     [SerializeField] private float maxHealth;
+     [SerializeField] private float color;
+     
 
     private void Start(){
+        color = .9f;
+        maxHealth = 20;
+        health = maxHealth;
         
-
-
-
     }
 
     private void Update()
     {
-        gameObject.GetComponent<Renderer>().material.color = c1;
+
+        gameObject.GetComponent<Renderer>().material.color = Color.Lerp(Color.white,Color.red,color);
+
+        if(color >= health/maxHealth){
+            color -= Time.deltaTime / 2;
+        }
+        
     }
+
+    
 }
