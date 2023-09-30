@@ -55,6 +55,7 @@ public class Enemy : MonoBehaviour
                 {
                     //insert add point here
                     Destroy(gameObject1);
+                    Destroy(other.gameObject);
                     gameObject.GetComponent<ParticleSystem>().Play();
                     Destroy(gameObject, 1);
                     isDead = true;
