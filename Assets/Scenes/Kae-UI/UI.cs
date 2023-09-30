@@ -16,7 +16,7 @@ public class UI : MonoBehaviour
     {
         currentTime = 3;
         isPlaying = false;
-        wallCloseTime = 5;
+        wallCloseTime = 1f;
         points.text = "0";
     }
     private void Update()
