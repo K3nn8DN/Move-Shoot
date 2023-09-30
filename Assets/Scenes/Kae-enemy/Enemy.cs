@@ -18,7 +18,7 @@ public class Enemy : MonoBehaviour
     private void Start(){
         gameObject1 = gameObject.GetComponent<Renderer>();
         color = .99f;
-        maxHealth = 20;
+        //maxHealth = 20;
         health = maxHealth;
         isDead = false;
 
@@ -55,6 +55,7 @@ public class Enemy : MonoBehaviour
                 {
                     //insert add point here
                     Destroy(gameObject1);
+                    Destroy(other.gameObject);
                     gameObject.GetComponent<ParticleSystem>().Play();
                     Destroy(gameObject, 1);
                     isDead = true;
