@@ -6,9 +6,8 @@ using TMPro;
 public class UI : MonoBehaviour
 {
     public TextMeshProUGUI countDown;
-    public TMP_Text pause;
-    public TMP_Text points;
-    public TMP_Text timer;
+    public TextMeshProUGUI points;
+    public TextMeshProUGUI timer;
     public float currentTime;
     private bool isPlaying;
     private float wallCloseTime;
@@ -18,6 +17,7 @@ public class UI : MonoBehaviour
         currentTime = 3;
         isPlaying = false;
         wallCloseTime = 5;
+        points.text = "0";
     }
     private void Update()
     {
@@ -25,19 +25,30 @@ public class UI : MonoBehaviour
         {
             currentTime -= Time.deltaTime;
             countDown.text= currentTime.ToString("0");
+            timer.enabled = false;
+            points.enabled = false;
+
             if (currentTime <= .1)
             {
-                currentTime = wallCloseTime;
+                currentTime = wallCloseTime*60;
                 isPlaying = true;
-                
+                timer.enabled = true;
+                points.enabled = true;
+                countDown.enabled = false;
+
             }
         }
         if (isPlaying)
         {
-            currentTime -= Time.deltaTime;
-            timer.text = currentTime.ToString("0");
             
+            float minutes = Mathf.FloorToInt(currentTime / 60);
+            float seconds = Mathf.FloorToInt(currentTime % 60);
+            currentTime -= Time.deltaTime;
+            timer.text = string.Format("{0:00}:{1:00}",minutes,seconds);  
+
         }
+
+
     }
 
     
