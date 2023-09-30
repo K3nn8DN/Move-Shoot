@@ -7,10 +7,11 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float health;
     [SerializeField] private float maxHealth;
     [SerializeField] private float color;
-    [SerializeField] private float damage;
+    //[SerializeField] private float gunDamage;
     private Renderer gameObject1;
     private bool isDead;
-   
+
+    private float gunDamage = Gun.damage;
     
      
      
@@ -18,7 +19,7 @@ public class Enemy : MonoBehaviour
     private void Start(){
         gameObject1 = gameObject.GetComponent<Renderer>();
         color = .99f;
-        //maxHealth = 20;
+        maxHealth = 20;
         health = maxHealth;
         isDead = false;
 
@@ -48,19 +49,21 @@ public class Enemy : MonoBehaviour
         {
             if (other.CompareTag("Bullet"))
             {
-                health -= damage;
+
+                health -= gunDamage;
 
 
                 if (health <= 0)
                 {
                     //insert add point here
                     Destroy(gameObject1);
-                    Destroy(other.gameObject);
                     gameObject.GetComponent<ParticleSystem>().Play();
                     Destroy(gameObject, 1);
                     isDead = true;
 
                 }
+                
+                Destroy(other.gameObject);
             }
             
 
