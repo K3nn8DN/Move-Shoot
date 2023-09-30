@@ -7,8 +7,9 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float health;
     [SerializeField] private float maxHealth;
     [SerializeField] private float color;
-    private float damage;
+    [SerializeField] private float damage;
     private Renderer gameObject1;
+    public float temp;
      
      
 
@@ -22,6 +23,7 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
+       
         //sets and changes enemy color based on health
         gameObject1.material.color = Color.Lerp(Color.white,Color.red,color);
         if(color >= health/maxHealth){
@@ -30,20 +32,38 @@ public class Enemy : MonoBehaviour
         
     }
 
-    private void TakeDamege()
+    
+
+
+      void OnTriggerEnter(Collider other)
     {
-       health -= damage;
-        //insert something to show damage
-       if (health <= 0){
-            //insert add point here
-            //insert explode here
+        Debug.Log(other);
+        if (other.CompareTag("Bullet"))
+        {
+            health -= damage;
+            
+
+            if (health <= 0)
+            {
+                //insert add point here
+                //insert explode here
+                Destroy(gameObject);
 
             }
-        
+        }
+        if (other.CompareTag("Wall"))
+        {
+
+        }
+        if (other.CompareTag("Player"))
+        {
+
+        }
+
 
     }
 
-    
 
-    
+
+
 }
