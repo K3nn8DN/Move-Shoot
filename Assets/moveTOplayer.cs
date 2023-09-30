@@ -2,21 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class wallMovement : MonoBehaviour
+public class moveTOplayer : MonoBehaviour
 {
     [SerializeField]
-    private Transform waypoint;
+    private Transform player;
     [SerializeField]
     [Tooltip("movespeed in units per second")]
-    [Range(0f, 10)]
-    private float moveSpeed = 3;
-    public GameObject Target;
+    [Range(0f, 20)]
+    private float moveSpeed = 5;
 
     private Transform targetWaypoint;
     // Start is called before the first frame update
     void Start()
     {
-        targetWaypoint = waypoint;
+        targetWaypoint = player;
     }
 
     // Update is called once per frame
