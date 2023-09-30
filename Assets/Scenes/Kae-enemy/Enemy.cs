@@ -12,6 +12,7 @@ public class Enemy : MonoBehaviour
     private bool isDead;
 
     private float gunDamage = Gun.damage;
+    private bool isGunCharged;
     
      
      
@@ -22,6 +23,8 @@ public class Enemy : MonoBehaviour
         maxHealth = 20;
         health = maxHealth;
         isDead = false;
+
+        isGunCharged = Gun.isGunCharged;
 
     }
 
@@ -49,9 +52,15 @@ public class Enemy : MonoBehaviour
         {
             if (other.CompareTag("Bullet"))
             {
-
-                health -= gunDamage;
-
+                if (isGunCharged == true)
+                {
+                    health -= gunDamage * 2; //charged shot currently just means 2x damage
+                    isGunCharged = false;
+                }
+                else
+                {
+                    health -= gunDamage;
+                }
 
                 if (health <= 0)
                 {

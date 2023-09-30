@@ -11,6 +11,13 @@ public class Gun : MonoBehaviour
     public float fireRate = 0.5f;
     private float nextFireTime = 0f;
     public static float damage = 1;
+    public static bool isGunCharged = false;
+
+    public void ChargeGun()
+    {
+        isGunCharged = true;
+    }
+
 
     void Update()
     {
