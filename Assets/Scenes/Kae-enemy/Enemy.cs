@@ -18,7 +18,7 @@ public class Enemy : MonoBehaviour
     private void Start(){
         gameObject1 = gameObject.GetComponent<Renderer>();
         color = .99f;
-        maxHealth = 20;
+        //maxHealth = 20;
         health = maxHealth;
         isDead = false;
 
