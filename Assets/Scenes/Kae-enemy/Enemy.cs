@@ -7,10 +7,11 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float health;
     [SerializeField] private float maxHealth;
     [SerializeField] private float color;
-    [SerializeField] private float damage;
+    //[SerializeField] private float gunDamage;
     private Renderer gameObject1;
     private bool isDead;
-   
+
+    private float gunDamage = Gun.damage;
     
      
      
@@ -48,7 +49,8 @@ public class Enemy : MonoBehaviour
         {
             if (other.CompareTag("Bullet"))
             {
-                health -= damage;
+
+                health -= gunDamage;
 
 
                 if (health <= 0)
@@ -60,6 +62,8 @@ public class Enemy : MonoBehaviour
                     isDead = true;
 
                 }
+                
+                Destroy(other.gameObject);
             }
             
 

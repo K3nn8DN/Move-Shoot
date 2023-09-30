@@ -27,8 +27,6 @@ public class Bullet : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        //Destroy(collision.gameObject);
-        //Destroy(gameObject);
 
         if (currentRicochets < maxRicochets)
         {
@@ -37,6 +35,11 @@ public class Bullet : MonoBehaviour
             rb.velocity = reflectionDirection;
 
             currentRicochets++;
+        }
+        else if (collision.gameObject.CompareTag("Enemy"))
+        {
+            //Destroy(collision.gameObject);
+            //Destroy(gameObject);
         }
         else
         {
