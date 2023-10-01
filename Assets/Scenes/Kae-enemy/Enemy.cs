@@ -5,11 +5,11 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private float health;
-    [SerializeField] private float maxHealth;
-    [SerializeField] private float color;
+    [SerializeField] private float maxHealth = 20;
+    [SerializeField] private float color = 1f;
     //[SerializeField] private float gunDamage;
     private Renderer gameObject1;
-    private bool isDead;
+    private bool isDead = false;
 
     private float gunDamage = Gun.damage;
     
@@ -18,12 +18,7 @@ public class Enemy : MonoBehaviour
 
     private void Start(){
         gameObject1 = gameObject.GetComponent<Renderer>();
-        color = .99f;
-        maxHealth = 20;
         health = maxHealth;
-        isDead = false;
-
-
     }
 
     private void Update()

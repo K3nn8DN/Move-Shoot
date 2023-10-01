@@ -11,6 +11,8 @@ public class CameraController : MonoBehaviour
     [SerializeField]
     private float rotationSensitivity;
 
+    private float xRot = 0f;
+
     private void Awake()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -40,6 +42,12 @@ public class CameraController : MonoBehaviour
     private void RotateCamera(Vector2 delta)
     {
         tracked.Rotate(rotationSensitivity * delta.x * Time.deltaTime * Vector3.up);
-        transform.RotateAround(transform.position, transform.right, rotationSensitivity * -delta.y * Time.deltaTime);
+
+        xRot += rotationSensitivity * -delta.y * Time.deltaTime;
+
+        if (xRot < 90f && xRot > -90f)
+            transform.RotateAround(transform.position, transform.right, rotationSensitivity * -delta.y * Time.deltaTime);
+        else
+            xRot = Mathf.Clamp(xRot, -90f, 90f);
     }
 }
