@@ -33,7 +33,7 @@ public class UI : MonoBehaviour
         pauseUI.active = false;
         CountdownUi.active = true;
         gameOver.enabled = false;
-        points = 2;
+        
         
 
     }
@@ -61,7 +61,8 @@ public class UI : MonoBehaviour
             float minutes = Mathf.FloorToInt(currentTime / 60);
             float seconds = Mathf.FloorToInt(currentTime % 60);
             currentTime -= Time.deltaTime;
-            timer.text = string.Format("{0:00}:{1:00}",minutes,seconds);  
+            timer.text = string.Format("{0:00}:{1:00}",minutes,seconds);
+            pointText.text = GameManager.instance.GetPoints().ToString();
             if (currentTime <= 0)
             {
                 SetEnd();
@@ -84,10 +85,10 @@ public class UI : MonoBehaviour
             gameOver.enabled = true;
             pauseUI.active = true;
             play.active = false;
-            
 
-            
-            pointText.text = points.ToString();
+
+
+            pointText.text = GameManager.instance.GetPoints().ToString();
 
         }
 
@@ -129,11 +130,6 @@ public class UI : MonoBehaviour
     public void Restart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
-
-    public void MainMenu()
-    {
-       // SceneManager.LoadScene(MainMenuScene);
     }
 
 }

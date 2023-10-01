@@ -52,7 +52,7 @@ public class Enemy : MonoBehaviour
 
                 if (health <= 0)
                 {
-                    //insert add point here
+                    GameManager.instance.ChangeScore(1);
                     Destroy(gameObject1);
                     gameObject.GetComponent<ParticleSystem>().Play();
                     GetComponent<AudioSource>().Play();
