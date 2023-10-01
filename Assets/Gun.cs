@@ -36,9 +36,9 @@ public class Gun : MonoBehaviour
 
     private void ShootBullet(float angle)
     {
-        var bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
-        Quaternion.Euler()
-        bullet.GetComponent<Rigidbody>().velocity = bulletSpawnPoint.forward * bulletSpeed; //first bullet (straight)
+        Quaternion spreadRotation = Quaternion.Euler(0, angle, 0);
+        var bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation * spreadRotation);
+        bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * bulletSpeed;
     }
 
     public void ShootGun(InputAction.CallbackContext context)

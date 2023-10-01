@@ -12,7 +12,6 @@ public class Enemy : MonoBehaviour
     private bool isDead;
 
     private float gunDamage = Gun.damage;
-    private bool isGunCharged;
     
      
      
@@ -24,7 +23,6 @@ public class Enemy : MonoBehaviour
         health = maxHealth;
         isDead = false;
 
-        isGunCharged = Gun.isGunCharged;
 
     }
 
