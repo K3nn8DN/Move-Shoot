@@ -29,18 +29,6 @@ public class Bullet : MonoBehaviour
     {
         lastVelocity = rb.velocity;
 
-        if (!ricochetAudio.isPlaying)
-        {
-            float randomPitch = Random.Range(minPitch, maxPitch);
-
-            ricochetAudio.pitch = randomPitch;
-        }
-        if (!bulletImpactAudio.isPlaying)
-        {
-            float randomPitch = Random.Range(minPitch, maxPitch);
-
-            bulletImpactAudio.pitch = randomPitch;
-        }
     }
 
     void OnCollisionEnter(Collision collision)
@@ -54,6 +42,8 @@ public class Bullet : MonoBehaviour
 
             currentRicochets++;
 
+            float randomPitch = Random.Range(minPitch, maxPitch);
+            ricochetAudio.pitch = randomPitch;
             if (ricochetAudio != null && ricochetAudio.clip != null)
             {
                 ricochetAudio.Play();
@@ -65,6 +55,8 @@ public class Bullet : MonoBehaviour
             //Destroy(collision.gameObject);
             //Destroy(gameObject);
 
+            float randomPitch = Random.Range(minPitch+0.5f, maxPitch-0.5f);
+            bulletImpactAudio.pitch = randomPitch;
             if (bulletImpactAudio != null && bulletImpactAudio.clip != null)
             {
                 bulletImpactAudio.Play();

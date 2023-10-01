@@ -11,9 +11,11 @@ public class Enemy : MonoBehaviour
     private bool isDead = false;
 
     private float gunDamage = Gun.damage;
-    
-     
-     
+
+    public AudioSource enemyDeathAudio;
+    public float minPitch = 0.25f;
+    public float maxPitch = 1.75f;
+
 
     private void Start(){
         gameObject1 = gameObject.GetComponent<Renderer>();
@@ -34,7 +36,7 @@ public class Enemy : MonoBehaviour
             color -= Time.deltaTime / 2;
         }
         */
-        
+
     }
 
     
@@ -48,7 +50,10 @@ public class Enemy : MonoBehaviour
             {
                 
                 health -= gunDamage;
-        
+
+                
+
+
 
                 if (health <= 0)
                 {
@@ -58,6 +63,13 @@ public class Enemy : MonoBehaviour
                     GetComponent<AudioSource>().Play();
                     Destroy(gameObject, 1);
                     isDead = true;
+
+                    float randomPitch = Random.Range(minPitch, maxPitch);
+                    enemyDeathAudio.pitch = randomPitch;
+                    if (enemyDeathAudio != null && enemyDeathAudio.clip != null)
+                    {
+                        enemyDeathAudio.Play();
+                    }
 
                 }
                 

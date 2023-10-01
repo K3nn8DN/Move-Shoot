@@ -45,8 +45,8 @@ public class Gun : MonoBehaviour
     public AudioSource gunAudioRegular;
     public AudioSource gunAudioCharged;
 
-    public float minPitch = 0.75f;
-    public float maxPitch = 1.25f;
+    public float minPitch = 0.25f;
+    public float maxPitch = 1.75f;
 
     private void Start()
     { 
@@ -99,6 +99,8 @@ public class Gun : MonoBehaviour
             }
             else
             {
+                float randomPitch = Random.Range(minPitch, maxPitch);
+                gunAudioRegular.pitch = randomPitch;
                 if (gunAudioRegular != null && gunAudioRegular.clip != null)
                 {
                     gunAudioRegular.Play();
@@ -113,12 +115,6 @@ public class Gun : MonoBehaviour
 
     void Update()
     {
-        if (gunAudioRegular.isPlaying)
-        {
-            float randomPitch = Random.Range(minPitch, maxPitch);
-
-            gunAudioRegular.pitch = randomPitch;
-        }
 
         if (!canShoot && Time.time >= nextFireTime)
         {
