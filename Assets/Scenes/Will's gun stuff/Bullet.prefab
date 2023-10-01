@@ -246,7 +246,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   life: 3
   ricochetAudio: {fileID: 3818113240592358707}
-  enemyDeathAudio: {fileID: -1449204305405542138}
+  bulletImpactAudio: {fileID: -1449204305405542138}
   minPitch: 0.25
   maxPitch: 1.75
 --- !u!33 &3017505107162260057
