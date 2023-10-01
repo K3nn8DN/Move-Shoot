@@ -20,7 +20,7 @@ public class UI : MonoBehaviour
     public GameObject play;
     public GameObject pause;
     public GameObject mainMenu;
-    private float points;
+    
     
 
     private void Start()
@@ -30,8 +30,8 @@ public class UI : MonoBehaviour
         isPaused = false;
         wallCloseTime = 1f;
         pointText.text = "0";
-        pauseUI.active = false;
-        CountdownUi.active = true;
+        pauseUI.SetActive(false);
+        CountdownUi.SetActive(true);
         gameOver.enabled = false;
         
         
@@ -45,7 +45,7 @@ public class UI : MonoBehaviour
             countDown.text= currentTime.ToString("0");
             timer.enabled = false;
             pointText.enabled = false;
-            pause.active = false;
+            pause.SetActive(false);
 
             if (currentTime <= .1)
             {
@@ -73,7 +73,7 @@ public class UI : MonoBehaviour
 
         if (isPaused == true && isPlaying==true)
         {
-            pauseUI.active = true;
+            pauseUI.SetActive(true);
 
             
 
@@ -81,10 +81,10 @@ public class UI : MonoBehaviour
         if (isPaused==true && isPlaying == false)
         {
             
-            CountdownUi.active = false;
+            CountdownUi.SetActive(false);
             gameOver.enabled = true;
-            pauseUI.active = true;
-            play.active = false;
+            pauseUI.SetActive(true);
+            play.SetActive(false);
 
 
 
@@ -102,10 +102,10 @@ public class UI : MonoBehaviour
         isPlaying = true;
 
 
-        pauseUI.active = false;
-        CountdownUi.active = true;
+        pauseUI.SetActive(false);
+        CountdownUi.SetActive(true);
         isPlaying = true;
-        pause.active = true;
+        pause.SetActive(true);
         timer.enabled = true;
         pointText.enabled = true;
         countDown.enabled = false;
@@ -116,8 +116,8 @@ public class UI : MonoBehaviour
         isPaused = true;
         isPlaying = true;
 
-        pauseUI.active = true;
-        CountdownUi.active = false;
+        pauseUI.SetActive(true);
+        CountdownUi.SetActive(false);
 
 
     }
