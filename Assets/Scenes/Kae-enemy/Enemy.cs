@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private float health;
+    private float health;
     [SerializeField] private float maxHealth = 20;
-    [SerializeField] private float color = 1f;
     //[SerializeField] private float gunDamage;
     private Renderer gameObject1;
     private bool isDead = false;
@@ -24,6 +23,7 @@ public class Enemy : MonoBehaviour
     private void Update()
     {
 
+        /*
         //sets and changes enemy color based on health
         if (isDead == false)
         {
@@ -33,6 +33,7 @@ public class Enemy : MonoBehaviour
         if (color >= health/maxHealth){
             color -= Time.deltaTime / 2;
         }
+        */
         
     }
 
@@ -54,6 +55,7 @@ public class Enemy : MonoBehaviour
                     //insert add point here
                     Destroy(gameObject1);
                     gameObject.GetComponent<ParticleSystem>().Play();
+                    GetComponent<AudioSource>().Play();
                     Destroy(gameObject, 1);
                     isDead = true;
 
