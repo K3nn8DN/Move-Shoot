@@ -13,7 +13,8 @@ public class Gun : MonoBehaviour
     private float nextFireTime = 0f;
     public static float damage = 1;
     public static bool isGunCharged = false;
-    public static float numCharges;
+    public float numCharges = 0;
+    public float maxCharges = 7;
 
     private AudioSource audioSource;
     public float minPitch = 0.75f;
@@ -27,19 +28,44 @@ public class Gun : MonoBehaviour
     public void ChargeGun()
     {
         isGunCharged = true;
+        if (numCharges < maxCharges)
+        {
+            numCharges += 1;
+        }
+    }
+
+    private void ShootBullet(float angle)
+    {
+        var bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
+        Quaternion.Euler()
+        bullet.GetComponent<Rigidbody>().velocity = bulletSpawnPoint.forward * bulletSpeed; //first bullet (straight)
     }
 
     public void ShootGun(InputAction.CallbackContext context)
     {
         if (canShoot && context.performed)
-        { 
-            var bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
-            bullet.GetComponent<Rigidbody>().velocity = bulletSpawnPoint.forward * bulletSpeed;
+        {
+            //write a function that determines the number of bullets to shoot (based on numCharges)
+            //if (numCharges % 2 == 0) //even spread
+            //{
+
+            //}
+            //else
+            //{
+
+            //}
+
+            ShootBullet(0);
+
+            isGunCharged = false;
+
             if (audioSource != null && audioSource.clip != null)
             {
                 audioSource.Play();
             }
+            
             canShoot = false;
+
             nextFireTime = Time.time + fireRate;
         }
     }

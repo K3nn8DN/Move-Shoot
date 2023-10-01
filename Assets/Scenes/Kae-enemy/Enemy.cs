@@ -52,15 +52,9 @@ public class Enemy : MonoBehaviour
         {
             if (other.CompareTag("Bullet"))
             {
-                if (isGunCharged == true)
-                {
-                    health -= gunDamage * 2; //charged shot currently just means 2x damage
-                    isGunCharged = false;
-                }
-                else
-                {
-                    health -= gunDamage;
-                }
+                
+                health -= gunDamage;
+        
 
                 if (health <= 0)
                 {
