@@ -23,24 +23,10 @@ public class Enemy : MonoBehaviour
         health = maxHealth;
     }
 
-    private void Update()
+    private void OnDestroy()
     {
-
-        /*
-        //sets and changes enemy color based on health
-        if (isDead == false)
-        {
-            gameObject1.material.color = Color.Lerp(Color.white, Color.red, color);
-        }
-
-        if (color >= health/maxHealth){
-            color -= Time.deltaTime / 2;
-        }
-        */
-
+        GameManager.instance.ChangeScore(1);
     }
-
-    
 
 
       void OnTriggerEnter(Collider other)

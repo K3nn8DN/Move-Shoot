@@ -32,7 +32,15 @@ public class RecoilHandler : MonoBehaviour
 
             // flatten velo vector so you get instant vertical feedback from recoil
             Vector3 velo = m_rigidbody.velocity;
-            velo.y = 0f;
+            if (velo.y <= 0f)
+            {
+                velo.y = 0f;
+            }
+            else
+            {
+                velo.y += 3f;
+            }
+
             m_rigidbody.velocity = velo;
             //
 

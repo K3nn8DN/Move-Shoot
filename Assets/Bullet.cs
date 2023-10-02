@@ -31,6 +31,11 @@ public class Bullet : MonoBehaviour
 
     }
 
+    private void Update()
+    {
+        transform.Rotate(0f, 0f, 1f);
+    }
+
     void OnCollisionEnter(Collision collision)
     {
 

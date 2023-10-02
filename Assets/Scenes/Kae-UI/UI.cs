@@ -15,35 +15,42 @@ public class UI : MonoBehaviour
     public float currentTime;
     private bool isPlaying;
     private bool isPaused;
-    private float wallCloseTime;
     public GameObject CountdownUi;
     public GameObject pauseUI;
-    
-    
-    
+
+    public TextMeshProUGUI jumpCount;
+
+    private bool isNotDone = true;
    
     
     
 
     private void Start()
     {
-        currentTime = 3;
+        currentTime = 4;
         isPlaying = false;
         isPaused = false;
-        wallCloseTime = 1f;
+        isNotDone = true;
         pointText.text = "0";
         pauseUI.SetActive(false);
         CountdownUi.SetActive(true);
         gameOver.enabled = false;
-        
-        
+
+
+        Next.gameObject.SetActive(false);
 
     }
+
+    public void UpdateJumps(int i)
+    {
+        jumpCount.text = "x" + i.ToString();
+    }
+
     private void FixedUpdate()
     {
         if (isPlaying == false && isPaused == false)
         {
-            currentTime -= Time.fixedDeltaTime;
+            currentTime -= .06f; // time.fixedDetla
             countDown.text = currentTime.ToString("0");
             timer.enabled = false;
             pointText.enabled = false;
@@ -51,7 +58,7 @@ public class UI : MonoBehaviour
 
             if (currentTime <= .1)
             {
-                currentTime = wallCloseTime * 60;
+                currentTime = 0;
                 SetPlay();
                 GameManager.instance.Play();
 
@@ -63,9 +70,9 @@ public class UI : MonoBehaviour
 
             float minutes = Mathf.FloorToInt(currentTime / 60);
             float seconds = Mathf.FloorToInt(currentTime % 60);
-            currentTime -= Time.fixedDeltaTime;
+            currentTime += Time.fixedDeltaTime;
             timer.text = string.Format("{0:00}:{1:00}", minutes, seconds);
-            pointText.text = GameManager.instance.GetPoints().ToString();
+            pointText.text = GameManager.instance.GetPoints().ToString() + " / " + GameManager.instance.GetTotalEnemies();
             if (currentTime <= 0)
             {
                 SetEnd();
@@ -74,7 +81,19 @@ public class UI : MonoBehaviour
 
         }
 
-        
+        if (isNotDone && GameManager.instance.GetPoints() == GameManager.instance.GetTotalEnemies())
+        {
+            isNotDone = false;
+            isPlaying = false;
+            timer.gameObject.SetActive(false);
+
+            float minutes = Mathf.FloorToInt(currentTime / 60);
+            float seconds = Mathf.FloorToInt(currentTime % 60);
+            Next.text = Next.text + " " + string.Format("{0:00}:{1:00}", minutes, seconds);
+            InvokeRepeating(nameof(BlinkNext), .25f, 0.25f);
+        }
+
+        /*
         if (isPaused == true && isPlaying == false)
         {
 
@@ -88,7 +107,7 @@ public class UI : MonoBehaviour
             currentTime -= Time.fixedDeltaTime;
             countDown.text = currentTime.ToString("0");
 
-            if (GameManager.instance.GetPoints() > 2) {
+            if (GameManager.instance.GetPoints() > GameManager.instance.GetTotalEnemies()) {
                 gameOver.enabled = false;
                 Next.enabled = true;
                 Next.text = "Next Level in...";
@@ -96,14 +115,7 @@ public class UI : MonoBehaviour
                 
                 if(currentTime<= 0)
                 {
-
-                    if (GameManager.instance.scene =="First Level")
-                    {
-                        GameManager.instance.LoadNew("Level 2");
-                    }
-                    else { GameManager.instance.LoadNew("Title Screen"); }
-
-
+                    GameManager.instance.LoadNew(GameObject.FindGameObjectWithTag("SceneLoader").GetComponent<LoadNewScene>().sceneName);
                 }
 
             }
@@ -120,12 +132,19 @@ public class UI : MonoBehaviour
                 }
 
             }
+        
 
         }
+        */
 
-         
-            
 
+
+
+    }
+
+    void BlinkNext()
+    {
+        Next.gameObject.SetActive(!Next.gameObject.activeInHierarchy);
     }
 
     public void SetPlay()
@@ -151,9 +170,4 @@ public class UI : MonoBehaviour
         currentTime = 5;
 
     }
-    public void Restart()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
-
 }

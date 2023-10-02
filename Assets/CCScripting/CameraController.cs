@@ -10,7 +10,7 @@ public class CameraController : MonoBehaviour
     private Transform tracked;
 
     [SerializeField]
-    private float rotationSensitivity = 30;
+    private static float rotationSensitivity = 30;
 
     [SerializeField]
     private Text uiText;

@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
 {
     public UnityEvent OnWallJumpExecuted;
     public UnityEvent OnEmitSystem;
+    public UnityEvent<int> OnAirJumpUsed;
 
     private Rigidbody m_controller;
 
@@ -110,6 +111,7 @@ public class PlayerController : MonoBehaviour
         {
             m_numAirJumps = numAirJumps;
             m_numWallJumps = 0;
+            OnAirJumpUsed.Invoke(m_numAirJumps);
         }
 
         if (m_wasGroundedPrior != m_isGrounded)
@@ -171,6 +173,7 @@ public class PlayerController : MonoBehaviour
             if (has_air_jumps && !m_isGrounded && !m_againstWall)
             {
                 m_numAirJumps -= 1;
+                OnAirJumpUsed.Invoke(m_numAirJumps);
                 do_boost = true;
             }
 
@@ -193,7 +196,7 @@ public class PlayerController : MonoBehaviour
         if (m_againstWall)
         {
             m_numWallJumps += 1;
-            resultant += m_wallNormal * wallBounceForce * (2 - Vector3.Dot(m_wallNormal, transform.forward));
+            resultant += Vector3.up * 2f + m_wallNormal * wallBounceForce * (2 - Vector3.Dot(m_wallNormal, transform.forward));
         }
 
         return resultant;

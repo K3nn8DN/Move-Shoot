@@ -123,6 +123,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   enemyDeathAudio: {fileID: 5591725139932982520}
+  bulletImpactAudio: {fileID: 0}
   minPitch: 0.25
   maxPitch: 1.75
 --- !u!199 &7380177459004540039
@@ -4990,7 +4991,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 3ce05162dc508b14393e9e2d099136b8, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

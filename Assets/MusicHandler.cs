@@ -5,9 +5,13 @@ using UnityEngine;
 public class MusicHandler : MonoBehaviour
 {
     private AudioSource audioSource;
+    public static MusicHandler instance;
 
     void Awake()
     {
+        if (instance != null && instance != this)
+            Destroy(gameObject);
+        instance = this;
         DontDestroyOnLoad(this.gameObject);
     }
 
