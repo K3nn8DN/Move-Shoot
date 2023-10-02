@@ -61,6 +61,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float airJumpBoost = 2.5f;
 
+    public AudioSource jumpAudio;
+
     private void Awake()
     {
         m_controller = GetComponent<Rigidbody>();
@@ -157,6 +159,11 @@ public class PlayerController : MonoBehaviour
 
         if (m_isJumpPressed && (m_isGrounded || m_againstWall || has_air_jumps))
         {
+            if (jumpAudio != null && jumpAudio.clip != null)
+            {
+                jumpAudio.Play();
+            }
+
             m_isJumpPressed = false;
 
             bool do_boost = false;

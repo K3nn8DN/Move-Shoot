@@ -14,6 +14,8 @@ public class Gun : MonoBehaviour
     [SerializeField] private UnityEvent<int> OnGunChargeModified;
     [SerializeField] private ParticleSystem smokeSystem;
 
+    [SerializeField] private GunAnimationScript m_animations;
+
     [SerializeField] private float chargeTime;
     private float m_nextChargeTime = 0f;
 
@@ -45,8 +47,8 @@ public class Gun : MonoBehaviour
     public AudioSource gunAudioRegular;
     public AudioSource gunAudioCharged;
 
-    public float minPitch = 0.25f;
-    public float maxPitch = 1.75f;
+    public float minPitch = 0.5f;
+    public float maxPitch = 1.5f;
 
     private void Start()
     { 
@@ -95,6 +97,8 @@ public class Gun : MonoBehaviour
                 if (gunAudioCharged != null && gunAudioCharged.clip != null)
                 {
                     gunAudioCharged.Play();
+
+                    m_animations.PlayCharged();
                 }
             }
             else
@@ -104,6 +108,8 @@ public class Gun : MonoBehaviour
                 if (gunAudioRegular != null && gunAudioRegular.clip != null)
                 {
                     gunAudioRegular.Play();
+
+                    m_animations.PlayRegular();
                 }
             }
             canShoot = false;
@@ -124,7 +130,7 @@ public class Gun : MonoBehaviour
         // orient gun to face center of screen point
         Vector3 dest =
             Physics.Raycast(m_perspective.position, m_perspective.forward, out m_data, raycastDistance, mask) 
-            && m_data.distance > 1f ?
+            && m_data.distance > 2f ?
             (m_data.point - transform.position).normalized : m_perspective.forward;
 
         transform.forward = Vector3.Lerp(transform.forward, dest, lerpRate);

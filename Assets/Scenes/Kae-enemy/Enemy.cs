@@ -13,6 +13,7 @@ public class Enemy : MonoBehaviour
     private float gunDamage = Gun.damage;
 
     public AudioSource enemyDeathAudio;
+    public AudioSource bulletImpactAudio;
     public float minPitch = 0.25f;
     public float maxPitch = 1.75f;
 
@@ -51,21 +52,26 @@ public class Enemy : MonoBehaviour
                 
                 health -= gunDamage;
 
-                
+                if (bulletImpactAudio != null && bulletImpactAudio.clip != null)
+                {
+                    float randomPitch = Random.Range(minPitch + 0.25f, maxPitch - 0.5f);
+                    bulletImpactAudio.pitch = randomPitch;
+                    bulletImpactAudio.Play();
+                }
 
 
 
                 if (health <= 0)
                 {
-                    GameManager.instance.ChangeScore(1);
+                    //GameManager.instance.ChangeScore(1);
                     Destroy(gameObject1);
                     gameObject.GetComponent<ParticleSystem>().Play();
                     GetComponent<AudioSource>().Play();
                     Destroy(gameObject, 1);
                     isDead = true;
 
-                    float randomPitch = Random.Range(minPitch, maxPitch);
-                    enemyDeathAudio.pitch = randomPitch;
+                    //float randomPitch = Random.Range(minPitch, maxPitch);
+                    //enemyDeathAudio.pitch = randomPitch;
                     if (enemyDeathAudio != null && enemyDeathAudio.clip != null)
                     {
                         enemyDeathAudio.Play();
