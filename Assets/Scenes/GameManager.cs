@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     int points;
      Behaviour wallMoveScript;
+     
     
     public GameObject player;
     public GameObject wall1;
@@ -49,12 +50,11 @@ public class GameManager : MonoBehaviour
 
     public void OnSceneLoad(string sceneName)
     {
-        if (sceneName == "First Level" || sceneName == "Level 2")
+        if (sceneName == "First Level" || sceneName == "Kae")
 
         {
 
-            GameObject.Find("Input");
-            //Time.timeScale = 0f;
+            GameObject.Find("Input")?.SetActive(false);
 
             
             wallMoveScript= wall1.GetComponent<wallMovement>();

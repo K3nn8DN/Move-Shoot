@@ -37,11 +37,11 @@ public class UI : MonoBehaviour
         
 
     }
-    private void Update()
+    private void FixedUpdate()
     {
         if (isPlaying == false && isPaused==false)
         {
-            currentTime -= Time.deltaTime;
+            currentTime -= Time.fixedDeltaTime;
             countDown.text= currentTime.ToString("0");
             timer.enabled = false;
             pointText.enabled = false;
@@ -60,7 +60,7 @@ public class UI : MonoBehaviour
             
             float minutes = Mathf.FloorToInt(currentTime / 60);
             float seconds = Mathf.FloorToInt(currentTime % 60);
-            currentTime -= Time.deltaTime;
+            currentTime -= Time.fixedDeltaTime;
             timer.text = string.Format("{0:00}:{1:00}",minutes,seconds);
             pointText.text = GameManager.instance.GetPoints().ToString();
             if (currentTime <= 0)
