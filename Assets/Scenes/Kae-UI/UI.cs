@@ -20,6 +20,7 @@ public class UI : MonoBehaviour
     public GameObject play;
     public GameObject pause;
     public GameObject mainMenu;
+   
     
     
 
@@ -39,56 +40,62 @@ public class UI : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (isPlaying == false && isPaused==false)
+        if (isPlaying == false && isPaused == false)
         {
             currentTime -= Time.fixedDeltaTime;
-            countDown.text= currentTime.ToString("0");
+            countDown.text = currentTime.ToString("0");
             timer.enabled = false;
             pointText.enabled = false;
-            pause.SetActive(false);
+
 
             if (currentTime <= .1)
             {
-                currentTime = wallCloseTime*60;
+                currentTime = wallCloseTime * 60;
                 SetPlay();
+                GameManager.instance.Play();
 
             }
         }
 
-        if (isPlaying && isPaused==false)
+        if (isPlaying && isPaused == false)
         {
-            
+
             float minutes = Mathf.FloorToInt(currentTime / 60);
             float seconds = Mathf.FloorToInt(currentTime % 60);
             currentTime -= Time.fixedDeltaTime;
-            timer.text = string.Format("{0:00}:{1:00}",minutes,seconds);
+            timer.text = string.Format("{0:00}:{1:00}", minutes, seconds);
             pointText.text = GameManager.instance.GetPoints().ToString();
             if (currentTime <= 0)
             {
                 SetEnd();
-                
+
             }
 
         }
 
-        if (isPaused == true && isPlaying==true)
+        if (isPaused == true && isPlaying == true)
         {
             pauseUI.SetActive(true);
 
-            
+
 
         }
-        if (isPaused==true && isPlaying == false)
+        if (isPaused == true && isPlaying == false)
         {
-            
+
             CountdownUi.SetActive(false);
-            gameOver.enabled = true;
             pauseUI.SetActive(true);
             play.SetActive(false);
-
-
-
             pointText.text = GameManager.instance.GetPoints().ToString();
+            GameManager.instance.Pause();
+            if (GameManager.instance.GetPoints() > 5) { 
+
+                
+                 }
+         else {
+                
+
+                gameOver.enabled = true; }
 
         }
 
@@ -105,7 +112,7 @@ public class UI : MonoBehaviour
         pauseUI.SetActive(false);
         CountdownUi.SetActive(true);
         isPlaying = true;
-        pause.SetActive(true);
+        
         timer.enabled = true;
         pointText.enabled = true;
         countDown.enabled = false;
