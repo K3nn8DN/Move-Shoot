@@ -38,16 +38,18 @@ public class Gun : MonoBehaviour
             } 
         }
     }
+
     private int m_numCharges;
     public int maxCharges = 7;
 
-    private AudioSource audioSource;
-    public float minPitch = 0.75f;
-    public float maxPitch = 1.25f;
+    public AudioSource gunAudioRegular;
+    public AudioSource gunAudioCharged;
+
+    public float minPitch = 0.5f;
+    public float maxPitch = 1.5f;
 
     private void Start()
-    {
-        audioSource = GetComponent<AudioSource>();
+    { 
         m_perspective = Camera.main.transform;
     }
 
@@ -80,7 +82,7 @@ public class Gun : MonoBehaviour
             {
                 isGunCharged = false;
 
-                for (int i = 1; i < NumCharges + 1; i+=1)
+                for (int i = 1; i < NumCharges + 1; i += 1)
                 {
                     ShootBullet(10f * i * -1);
                     ShootBullet(10f * i);
@@ -89,13 +91,21 @@ public class Gun : MonoBehaviour
                 NumCharges = 0;
 
                 smokeSystem.Play();
-            }
 
-            if (audioSource != null && audioSource.clip != null)
-            {
-                audioSource.Play();
+                if (gunAudioCharged != null && gunAudioCharged.clip != null)
+                {
+                    gunAudioCharged.Play();
+                }
             }
-            
+            else
+            {
+                float randomPitch = Random.Range(minPitch, maxPitch);
+                gunAudioRegular.pitch = randomPitch;
+                if (gunAudioRegular != null && gunAudioRegular.clip != null)
+                {
+                    gunAudioRegular.Play();
+                }
+            }
             canShoot = false;
 
             nextFireTime = Time.time + fireRate;
@@ -105,12 +115,6 @@ public class Gun : MonoBehaviour
 
     void Update()
     {
-        if (audioSource.isPlaying)
-        {
-            float randomPitch = Random.Range(minPitch, maxPitch);
-
-            audioSource.pitch = randomPitch;
-        }
 
         if (!canShoot && Time.time >= nextFireTime)
         {

@@ -10,6 +10,11 @@ public class Bullet : MonoBehaviour
     private int currentRicochets = 0;
     private Vector3 lastVelocity;
 
+    public AudioSource ricochetAudio;
+    //public AudioSource bulletImpactAudio;
+    public float minPitch = 0.5f;
+    public float maxPitch = 1.75f;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -23,6 +28,7 @@ public class Bullet : MonoBehaviour
     void LateUpdate()
     {
         lastVelocity = rb.velocity;
+
     }
 
     void OnCollisionEnter(Collision collision)
@@ -35,11 +41,27 @@ public class Bullet : MonoBehaviour
             rb.velocity = reflectionDirection;
 
             currentRicochets++;
+
+            float randomPitch = Random.Range(minPitch, maxPitch);
+            ricochetAudio.pitch = randomPitch;
+            if (ricochetAudio != null && ricochetAudio.clip != null)
+            {
+                ricochetAudio.Play();
+            }
+
         }
         else if (collision.gameObject.CompareTag("Enemy"))
         {
             //Destroy(collision.gameObject);
             //Destroy(gameObject);
+
+            //float randomPitch = Random.Range(minPitch+0.25f, maxPitch-0.5f);
+            //bulletImpactAudio.pitch = randomPitch;
+            //if (bulletImpactAudio != null && bulletImpactAudio.clip != null)
+            //{
+            //    bulletImpactAudio.Play();
+            //}
+
         }
         else
         {

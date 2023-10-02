@@ -20,7 +20,7 @@ public class UI : MonoBehaviour
     public GameObject play;
     public GameObject pause;
     public GameObject mainMenu;
-    private float points;
+    
     
 
     private void Start()
@@ -30,22 +30,22 @@ public class UI : MonoBehaviour
         isPaused = false;
         wallCloseTime = 1f;
         pointText.text = "0";
-        pauseUI.active = false;
-        CountdownUi.active = true;
+        pauseUI.SetActive(false);
+        CountdownUi.SetActive(true);
         gameOver.enabled = false;
-        points = 2;
+        
         
 
     }
-    private void Update()
+    private void FixedUpdate()
     {
         if (isPlaying == false && isPaused==false)
         {
-            currentTime -= Time.deltaTime;
+            currentTime -= Time.fixedDeltaTime;
             countDown.text= currentTime.ToString("0");
             timer.enabled = false;
             pointText.enabled = false;
-            pause.active = false;
+            pause.SetActive(false);
 
             if (currentTime <= .1)
             {
@@ -60,8 +60,9 @@ public class UI : MonoBehaviour
             
             float minutes = Mathf.FloorToInt(currentTime / 60);
             float seconds = Mathf.FloorToInt(currentTime % 60);
-            currentTime -= Time.deltaTime;
-            timer.text = string.Format("{0:00}:{1:00}",minutes,seconds);  
+            currentTime -= Time.fixedDeltaTime;
+            timer.text = string.Format("{0:00}:{1:00}",minutes,seconds);
+            pointText.text = GameManager.instance.GetPoints().ToString();
             if (currentTime <= 0)
             {
                 SetEnd();
@@ -72,7 +73,7 @@ public class UI : MonoBehaviour
 
         if (isPaused == true && isPlaying==true)
         {
-            pauseUI.active = true;
+            pauseUI.SetActive(true);
 
             
 
@@ -80,14 +81,14 @@ public class UI : MonoBehaviour
         if (isPaused==true && isPlaying == false)
         {
             
-            CountdownUi.active = false;
+            CountdownUi.SetActive(false);
             gameOver.enabled = true;
-            pauseUI.active = true;
-            play.active = false;
-            
+            pauseUI.SetActive(true);
+            play.SetActive(false);
 
-            
-            pointText.text = points.ToString();
+
+
+            pointText.text = GameManager.instance.GetPoints().ToString();
 
         }
 
@@ -101,10 +102,10 @@ public class UI : MonoBehaviour
         isPlaying = true;
 
 
-        pauseUI.active = false;
-        CountdownUi.active = true;
+        pauseUI.SetActive(false);
+        CountdownUi.SetActive(true);
         isPlaying = true;
-        pause.active = true;
+        pause.SetActive(true);
         timer.enabled = true;
         pointText.enabled = true;
         countDown.enabled = false;
@@ -115,8 +116,8 @@ public class UI : MonoBehaviour
         isPaused = true;
         isPlaying = true;
 
-        pauseUI.active = true;
-        CountdownUi.active = false;
+        pauseUI.SetActive(true);
+        CountdownUi.SetActive(false);
 
 
     }
@@ -129,11 +130,6 @@ public class UI : MonoBehaviour
     public void Restart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
-
-    public void MainMenu()
-    {
-       // SceneManager.LoadScene(MainMenuScene);
     }
 
 }
