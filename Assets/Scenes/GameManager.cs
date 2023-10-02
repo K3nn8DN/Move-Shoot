@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -31,7 +32,7 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
-        input = GameObject.Find("Input");
+        
 
         GameManager.instance.OnSceneLoad(scene);
     }
@@ -56,7 +57,7 @@ public class GameManager : MonoBehaviour
         if (sceneName == "First Level" || sceneName == "Kae")
 
         {
-
+            input = GameObject.Find("Input");
             Pause();
             points = 0;
             
@@ -95,6 +96,12 @@ public class GameManager : MonoBehaviour
         wallMoveScript.enabled = true;
         wallMoveScript = wall4.GetComponent<wallMovement>();
         wallMoveScript.enabled = true;
+
+    }
+
+    public void LoadNew(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
 
     }
 

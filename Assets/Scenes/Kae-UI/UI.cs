@@ -11,15 +11,16 @@ public class UI : MonoBehaviour
     public TextMeshProUGUI pointText;
     public TextMeshProUGUI timer;
     public TextMeshProUGUI gameOver;
+    public TextMeshProUGUI Next;
     public float currentTime;
     private bool isPlaying;
     private bool isPaused;
     private float wallCloseTime;
     public GameObject CountdownUi;
     public GameObject pauseUI;
-    public GameObject play;
-    public GameObject pause;
-    public GameObject mainMenu;
+    
+    
+    
    
     
     
@@ -73,29 +74,52 @@ public class UI : MonoBehaviour
 
         }
 
-        if (isPaused == true && isPlaying == true)
-        {
-            pauseUI.SetActive(true);
-
-
-
-        }
+        
         if (isPaused == true && isPlaying == false)
         {
 
-            CountdownUi.SetActive(false);
+            CountdownUi.SetActive(true);
             pauseUI.SetActive(true);
-            play.SetActive(false);
+            
             pointText.text = GameManager.instance.GetPoints().ToString();
+            countDown.enabled = true;
             GameManager.instance.Pause();
-            if (GameManager.instance.GetPoints() > 5) { 
+            
+            currentTime -= Time.fixedDeltaTime;
+            countDown.text = currentTime.ToString("0");
 
+            if (GameManager.instance.GetPoints() > 2) {
+                gameOver.enabled = false;
+                Next.enabled = true;
+                Next.text = "Next Level in...";
                 
-                 }
+                
+                if(currentTime<= 0)
+                {
+
+                    if (GameManager.instance.scene =="First Level")
+                    {
+                        GameManager.instance.LoadNew("Level 2");
+                    }
+                    else { GameManager.instance.LoadNew("Title Screen"); }
+
+
+                }
+
+            }
          else {
                 
 
-                gameOver.enabled = true; }
+                gameOver.enabled = true;
+                Next.text = "to main menu in...";
+                Next.enabled = true;
+                if (currentTime <= 0)
+                {
+                      GameManager.instance.LoadNew("Title Screen"); 
+
+                }
+
+            }
 
         }
 
@@ -103,6 +127,7 @@ public class UI : MonoBehaviour
             
 
     }
+
     public void SetPlay()
     {
         isPaused = false;
@@ -118,20 +143,12 @@ public class UI : MonoBehaviour
         countDown.enabled = false;
     }
 
-    public void SetPause()
-    {
-        isPaused = true;
-        isPlaying = true;
-
-        pauseUI.SetActive(true);
-        CountdownUi.SetActive(false);
-
-
-    }
+  
     public void SetEnd()
     {
         isPaused = true;
         isPlaying = false;
+        currentTime = 5;
 
     }
     public void Restart()
