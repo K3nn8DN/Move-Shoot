@@ -45,8 +45,8 @@ public class Gun : MonoBehaviour
     public AudioSource gunAudioRegular;
     public AudioSource gunAudioCharged;
 
-    public float minPitch = 0.25f;
-    public float maxPitch = 1.75f;
+    public float minPitch = 0.5f;
+    public float maxPitch = 1.5f;
 
     private void Start()
     { 
