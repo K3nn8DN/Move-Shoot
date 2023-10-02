@@ -525,6 +525,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6908763d3535601458c139227c8909f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waypoint: {fileID: 1576581396}
+  moveSpeed: 3
+  Target: {fileID: 0}
 --- !u!64 &45612117
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1410,6 +1413,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6908763d3535601458c139227c8909f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waypoint: {fileID: 1576581396}
+  moveSpeed: 3
+  Target: {fileID: 0}
 --- !u!64 &175307593
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1777,6 +1783,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6908763d3535601458c139227c8909f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waypoint: {fileID: 1576581396}
+  moveSpeed: 3
+  Target: {fileID: 0}
 --- !u!64 &198126739
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3331,6 +3340,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6908763d3535601458c139227c8909f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waypoint: {fileID: 1576581396}
+  moveSpeed: 3
+  Target: {fileID: 0}
 --- !u!64 &1028965713
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -5578,6 +5590,10 @@ PrefabInstance:
     - target: {fileID: 2630122506756228281, guid: 0980591fa306bc846bb1122696c41902, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5182732953140380321, guid: 0980591fa306bc846bb1122696c41902, type: 3}
+      propertyPath: m_Volume
+      value: 0.92
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
