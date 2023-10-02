@@ -11,7 +11,7 @@ public class Bullet : MonoBehaviour
     private Vector3 lastVelocity;
 
     public AudioSource ricochetAudio;
-    public AudioSource bulletImpactAudio;
+    //public AudioSource bulletImpactAudio;
     public float minPitch = 0.5f;
     public float maxPitch = 1.75f;
 
@@ -55,12 +55,12 @@ public class Bullet : MonoBehaviour
             //Destroy(collision.gameObject);
             //Destroy(gameObject);
 
-            float randomPitch = Random.Range(minPitch+0.25f, maxPitch-0.5f);
-            bulletImpactAudio.pitch = randomPitch;
-            if (bulletImpactAudio != null && bulletImpactAudio.clip != null)
-            {
-                bulletImpactAudio.Play();
-            }
+            //float randomPitch = Random.Range(minPitch+0.25f, maxPitch-0.5f);
+            //bulletImpactAudio.pitch = randomPitch;
+            //if (bulletImpactAudio != null && bulletImpactAudio.clip != null)
+            //{
+            //    bulletImpactAudio.Play();
+            //}
 
         }
         else
