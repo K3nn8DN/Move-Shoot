@@ -26,7 +26,7 @@ public class RecoilHandler : MonoBehaviour
             Vector3 direction = Vector3.zero; // what direction is the recoil?
 
             if (m_gunType == 0)
-                direction = -(m_perspective.forward + Vector3.up * 0.5f);
+                direction = (-m_perspective.forward + Vector3.up * 0.05f);
 
             // more gun types would go here; change the if to a switch
 
@@ -35,10 +35,6 @@ public class RecoilHandler : MonoBehaviour
             if (velo.y <= 0f)
             {
                 velo.y = 0f;
-            }
-            else
-            {
-                velo.y += 3f;
             }
 
             m_rigidbody.velocity = velo;

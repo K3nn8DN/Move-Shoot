@@ -26,4 +26,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Kevin's Folder/Level 6.unity
     guid: baa7787daf798e9458e0ecd3f75b77ee
+  - enabled: 1
+    path: Assets/Scenes/Kevin's Folder/Level 7.unity
+    guid: d5b939760b893a0448438b31e62f9012
+  - enabled: 1
+    path: Assets/Scenes/Kevin's Folder/End.unity
+    guid: 01469d237e725f94e9fba1b7627a8673
   m_configObjects: {}

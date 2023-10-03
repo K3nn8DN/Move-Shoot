@@ -209,7 +209,7 @@ public class PlayerController : MonoBehaviour
         m_controller.velocity = velo;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionStay(Collision collision)
     {
         // polish: Make the walljump hitbox bigger than the player so you dont have to be flush with the wall to bounce
 

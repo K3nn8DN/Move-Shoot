@@ -35,19 +35,19 @@ public class CameraController : MonoBehaviour
     {
         if (context.performed)
         {
-            rotationSensitivity = Mathf.Clamp(rotationSensitivity + context.ReadValue<Vector2>().y * .1f, 1f, 180f);
+            rotationSensitivity = Mathf.Clamp(rotationSensitivity + context.ReadValue<Vector2>().y * .04f, 1f, 180f);
             uiText.text = rotationSensitivity.ToString();
         }
     }
 
     private void RotateCamera(Vector2 delta)
     {
-        tracked.Rotate(rotationSensitivity * delta.x * Time.deltaTime * Vector3.up);
+        tracked.Rotate(rotationSensitivity * delta.x * Time.deltaTime * Vector3.up * 0.1f);
 
-        xRot += rotationSensitivity * -delta.y * Time.deltaTime;
+        xRot += rotationSensitivity * -delta.y * Time.deltaTime * 0.1f;
 
         if (xRot < 90f && xRot > -90f)
-            transform.RotateAround(transform.position, transform.right, rotationSensitivity * -delta.y * Time.deltaTime);
+            transform.RotateAround(transform.position, transform.right, rotationSensitivity * -delta.y * Time.deltaTime * 0.1f);
         else
         {
             xRot = Mathf.Clamp(xRot, -90f, 90f);
